@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	vc "github.com/ploumpouloum/virtinfra-client-go"
 )
 
 func dataSourceVpcs() *schema.Resource {
@@ -22,6 +23,10 @@ func dataSourceVpcs() *schema.Resource {
 							Type:     schema.TypeString,
 							Computed: true,
 						},
+						"cidr": &schema.Schema{
+							Type:     schema.TypeString,
+							Computed: true,
+						},
 					},
 				},
 			},
@@ -30,16 +35,17 @@ func dataSourceVpcs() *schema.Resource {
 }
 
 func dataSourceVpcsRead(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*vc.Client)
 
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
-	vpcs := make([]map[string]interface{}, 0)
-	vpcs = append(vpcs, map[string]interface{}{
-		"id": "123",
-	})
+	vpcs, err := c.VpcGetList()
+	if err != nil {
+		return diag.FromErr(err)
+	}
 
-	if err := d.Set("vpcs", vpcs); err != nil {
+	if err := d.Set("vpcs", flattenVpcsData(vpcs)); err != nil {
 		return diag.FromErr(err)
 	}
 
@@ -47,4 +53,23 @@ func dataSourceVpcsRead(ctx context.Context, d *schema.ResourceData, m interface
 	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
 
 	return diags
+}
+
+func flattenVpcsData(vpcItems []vc.Vpc) []interface{} {
+	if vpcItems != nil {
+		vpcis := make([]interface{}, len(vpcItems), len(vpcItems))
+
+		for i, vpc := range vpcItems {
+			vpci := make(map[string]interface{})
+
+			vpci["id"] = vpc.Id
+			vpci["cidr"] = vpc.Cidr
+
+			vpcis[i] = vpci
+		}
+
+		return vpcis
+	}
+
+	return make([]interface{}, 0)
 }

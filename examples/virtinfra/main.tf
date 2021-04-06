@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+provider "virtinfra" {
+      local_file_location = "/Users/benoit/Repos/virtinfra/terraform-provider-virtinfra/examples/datasets/account_1.json"
+}
+
 data "virtinfra_vpcs" "all" {}
 
 # Returns all vpcs
