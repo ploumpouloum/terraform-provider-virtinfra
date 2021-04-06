@@ -21,6 +21,7 @@ func Provider() *schema.Provider {
 		ResourcesMap: map[string]*schema.Resource{},
 		DataSourcesMap: map[string]*schema.Resource{
 			"virtinfra_vpcs": dataSourceVpcs(),
+			"virtinfra_vpc":  dataSourceVpc(),
 		},
 		ConfigureContextFunc: providerConfigure,
 	}

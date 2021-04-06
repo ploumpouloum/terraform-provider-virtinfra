@@ -13,7 +13,15 @@ provider "virtinfra" {
 
 data "virtinfra_vpcs" "all" {}
 
+data "virtinfra_vpc" "vpc_1234" {
+  id = "1234"
+}
+
 # Returns all vpcs
 output "all_vpcs" {
   value = data.virtinfra_vpcs.all.vpcs
+}
+
+output "vpc_1234" {
+  value = data.virtinfra_vpc.vpc_1234
 }
