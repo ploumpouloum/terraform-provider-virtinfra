@@ -19,7 +19,8 @@ func Provider() *schema.Provider {
 			},
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"virtinfra_vpc": resourceVpc(),
+			"virtinfra_vpc":    resourceVpc(),
+			"virtinfra_subnet": resourceSubnet(),
 		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"virtinfra_vpcs": dataSourceVpcs(),
