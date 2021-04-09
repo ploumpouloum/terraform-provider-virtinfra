@@ -21,6 +21,11 @@ resource "virtinfra_vpc" "a_first_vpc" {
   cidr = "10.5.0.0/16"
 }
 
+resource "virtinfra_subnet" "a_first_subnet" {
+  cidr = "10.5.0.0/8"
+  vpc_id = virtinfra_vpc.a_first_vpc.id
+}
+
 # Returns all vpcs
 output "all_vpcs" {
   value = data.virtinfra_vpcs.all.vpcs

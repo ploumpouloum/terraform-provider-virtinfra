@@ -24,6 +24,9 @@ func resourceSubnet() *schema.Resource {
 				Required: true,
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }
 
@@ -56,6 +59,11 @@ func resourceSubnetRead(ctx context.Context, d *schema.ResourceData, m interface
 	subnet, err := c.SubnetGet((vc.SubnetId)(subnetId))
 	if err != nil {
 		return diag.FromErr(err)
+	}
+
+	if subnet == nil {
+		d.SetId("")
+		return diags
 	}
 
 	d.Set("cidr", subnet.Cidr)

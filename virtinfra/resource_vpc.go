@@ -20,6 +20,9 @@ func resourceVpc() *schema.Resource {
 				Required: true,
 			},
 		},
+		Importer: &schema.ResourceImporter{
+			StateContext: schema.ImportStatePassthroughContext,
+		},
 	}
 }
 
@@ -51,6 +54,11 @@ func resourceVpcRead(ctx context.Context, d *schema.ResourceData, m interface{})
 	vpc, err := c.VpcGet((vc.VpcId)(vpcId))
 	if err != nil {
 		return diag.FromErr(err)
+	}
+
+	if vpc == nil {
+		d.SetId("")
+		return diags
 	}
 
 	d.Set("cidr", vpc.Cidr)
