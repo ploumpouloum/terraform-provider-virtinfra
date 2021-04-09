@@ -17,6 +17,10 @@ data "virtinfra_vpc" "vpc_1234" {
   id = "1234"
 }
 
+resource "virtinfra_vpc" "a_first_vpc" {
+  cidr = "10.5.0.0/16"
+}
+
 # Returns all vpcs
 output "all_vpcs" {
   value = data.virtinfra_vpcs.all.vpcs

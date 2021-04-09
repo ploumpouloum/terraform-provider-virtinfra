@@ -18,7 +18,9 @@ func Provider() *schema.Provider {
 				DefaultFunc: schema.EnvDefaultFunc("VIRTINFRA_LOCAL_FILE_LOCATION", nil),
 			},
 		},
-		ResourcesMap: map[string]*schema.Resource{},
+		ResourcesMap: map[string]*schema.Resource{
+			"virtinfra_vpc": resourceVpc(),
+		},
 		DataSourcesMap: map[string]*schema.Resource{
 			"virtinfra_vpcs": dataSourceVpcs(),
 			"virtinfra_vpc":  dataSourceVpc(),
