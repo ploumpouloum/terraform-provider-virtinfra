@@ -1,22 +1,6 @@
-# Terraform Provider VirtInfra
+# Terraform Provider for VirtInfra
 
-Run the following command to build the provider
+The Terraform Provider for VirtIngra is a plugin for Terraform that allows for the full lifecycle management of VirtInfra resources.
 
-```shell
-go build -o terraform-provider-virtinfra
-```
-
-## Test sample configuration
-
-First, build and install the provider.
-
-```shell
-make install
-```
-
-Then, run the following command to initialize the workspace and apply the sample configuration.
-
-```shell
-cd examples/virtinfra
-terraform init && terraform apply
-```
+VirtInfra is a solution to provision dummy infrastructure for your tests and trainings. It is the perfect 
+companion of your documentation and blog posts. It avoids any reliance on a specific Cloud vendor. It removes the implication of a newbie errors like significant costs or very unsecure systems.
