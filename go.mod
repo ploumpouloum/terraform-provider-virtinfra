@@ -8,4 +8,4 @@ require (
 	github.com/ploumpouloum/virtinfra-client-go v0.0.0-20210406204225-ce1d4934a53a
 )
 
-replace github.com/ploumpouloum/virtinfra-client-go v0.0.0-20210406204225-ce1d4934a53a => ../virtinfra-client-go
+// replace github.com/ploumpouloum/virtinfra-client-go v0.0.0-20210406204225-ce1d4934a53a => ../virtinfra-client-go
