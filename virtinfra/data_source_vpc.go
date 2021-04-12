@@ -41,6 +41,9 @@ func dataSourceVpcRead(ctx context.Context, d *schema.ResourceData, m interface{
 	if err != nil {
 		return diag.FromErr(err)
 	}
+	if vpc == nil {
+		return diag.Errorf("Unable to find VPC id '%s'", vpcId)
+	}
 
 	d.SetId(string(vpc.Id))
 	d.Set("id", vpc.Id)
