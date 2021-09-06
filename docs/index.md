@@ -16,18 +16,7 @@ Use the navigation to the left to read about the available resources and data so
 
 ## Example Usage
 
-Terraform 0.13 and later:
-
 ```terraform
-terraform {
-  required_providers {
-    virtinfra = {
-      version = "0.0.1"
-      source  = "ploumpouloum.com/ploumpouloum/virtinfra"
-    }
-  }
-}
-
 # Configure the VirtInfra Provider
 provider "virtinfra" {
   local_file_location = "/mypath/account_1.json" # Path to any writable JSON file to store infrastructure
